@@ -18990,6 +18990,7 @@ MonoBehaviour:
   textPrefab: {fileID: 8938147554600363642}
   itemHolder: {fileID: 5662440764439189925}
   _selectedStack: 0
+  lookingAt: {fileID: 0}
 --- !u!54 &2832802219013092405
 Rigidbody:
   m_ObjectHideFlags: 0

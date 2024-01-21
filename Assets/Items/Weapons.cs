@@ -14,7 +14,7 @@ namespace Items
         [SerializeField] private List<string> projectileIdList = new List<string>();
         [SerializeField] private List<GameObject> loaded = new List<GameObject>();
         [SerializeField] private GameObject caseThrower;
-        private float shootTicker = 0;
+        [SerializeField] private float shootTicker = 0;
         private float reloadTicker = 0;
         public void reload()
         {
@@ -34,33 +34,31 @@ namespace Items
         public override void use()
         {
              
-            if (shootTicker < 1/shootSpeed) {
-                shootTicker += Time.deltaTime;
-                return;
-            }
-            
-            shootTicker = 0;
-            
-            var forward = player.GetComponentInChildren<Camera>().transform;
-            if (loaded.Count > 0) {
-                loaded[0].gameObject.SetActive(true);
-                
-                if (loaded[0].GetComponent<Bullet>() != null)
-                {
-                    throwCasing(loaded[0].GetComponent<Bullet>().casing);
-                }
-                
-                loaded[0].transform.SetPositionAndRotation(forward.position+forward.forward, player.GetComponentInChildren<Camera>().transform.rotation);
-                loaded[0].GetComponent<Rigidbody>().AddForce(forward.forward*loaded[0].GetComponent<Projectile>().speed);
+            if (shootTicker > 1/shootSpeed) {
 
-                
-                loaded.RemoveAt(0);
+                shootTicker = 0;
+                var forward = player.GetComponentInChildren<Camera>().transform;
+                if (loaded.Count > 0) {
+                    loaded[0].gameObject.SetActive(true);
+                    
+                    if (loaded[0].GetComponent<Bullet>() != null)
+                    {
+                        throwCasing(loaded[0].GetComponent<Bullet>().casing);
+                    }
+                    
+                    loaded[0].transform.SetPositionAndRotation(forward.position+forward.forward, player.GetComponentInChildren<Camera>().transform.rotation);
+                    loaded[0].GetComponent<Rigidbody>().AddForce(forward.forward*loaded[0].GetComponent<Projectile>().speed);
+
+                    
+                    loaded.RemoveAt(0);
+                }
             }
-            
         }
 
-        public override void update()
-        {
+        public override void update() {
+            if (shootTicker < shootSpeed) {
+                shootTicker += Time.deltaTime;
+            }
             base.update();
             if (Input.GetKeyDown(KeyCode.R))
             {
