@@ -91,7 +91,7 @@ namespace Items.Inventory
                     FetchItem(hit.transform);
                 }
 
-                if (hit.transform.tag == "item") {
+                if (hit.transform.tag == "item" && hit.transform.GetComponentInChildren<TMP_Text>() != null) {
                     if(lookingAt != hit.transform) {
                         if (lookingAt != null) {
                             lookingAt.GetComponentInChildren<TMP_Text>().enabled = false;
