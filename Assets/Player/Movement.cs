@@ -23,6 +23,7 @@ public class Movement : NetworkBehaviour
     private float xRotation = 0f;
     private float move_X;
     private float move_Z;
+    private float maxSpeed = 8;
     
     void Start()
     {
@@ -31,6 +32,8 @@ public class Movement : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    public GameObject prefab;
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * lookSensitivity;
@@ -87,7 +90,13 @@ public class Movement : NetworkBehaviour
         timer -= Time.deltaTime;
 
         Vector3 movement = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
-        rb.velocity = (movement * (moveSpeed * 50 * Time.fixedDeltaTime)) + new Vector3(0f, rb.velocity.y, 0f);
+
+        if (rb.velocity.magnitude < maxSpeed)
+        {
+            rb.AddForce(movement * (moveSpeed * 50 * Time.fixedDeltaTime));
+        }
+        
+        //rb.velocity = (movement * (moveSpeed * 50 * Time.fixedDeltaTime)) + new Vector3(0f, rb.velocity.y, 0f);
     }
     void OnCollisionEnter(Collision other)
     {
@@ -96,4 +105,5 @@ public class Movement : NetworkBehaviour
             isGrounded = true;
         }
     }
+
 }
