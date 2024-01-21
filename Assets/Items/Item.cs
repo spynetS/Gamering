@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,13 +11,24 @@ namespace Items
         public string id;
         private ItemRecipe myRecipe;
         public GameObject player { get; set; }
-
+       
+        public GameObject text;
+        
         private void Start()
         {
+            /*
+             * Adds items neeeded for items
+             * Trigger collider
+             * Text for press me
+             */
             this.gameObject.tag = "item";
             BoxCollider asd = this.AddComponent<BoxCollider>();
             asd.size = new Vector3(1, 1, 1);
             asd.isTrigger = true;
+
+            var t = Instantiate(text, transform);
+            t.GetComponent<TMP_Text>().enabled = false;
+
         }
 
         public void drop(float amount = 100)
@@ -30,6 +42,7 @@ namespace Items
 
                 var inventory = player.GetComponent<Inventory.Inventory>();
                 inventory.stacks[inventory.selectedStack].items.RemoveAt(0);
+                
             }
         }
 
@@ -40,8 +53,11 @@ namespace Items
         {
             transform.SetParent(player.GetComponent<Inventory.Inventory>().itemHolder.transform,true);
             transform.GetComponent<Rigidbody>().isKinematic = true;
+            transform.GetComponentInChildren<TMP_Text>().enabled = false;
 
-            transform.GetComponent<BoxCollider>().enabled = false;
+            foreach (BoxCollider col in transform.GetComponents<BoxCollider>()) {
+                col.enabled = false;
+            }
             transform.localScale = Vector3.one;
             transform.rotation = Quaternion.identity;
             transform.localRotation = Quaternion.identity;
@@ -55,17 +71,17 @@ namespace Items
          */
         public void setItemToBeDroped()
         {
-            transform.GetComponent<BoxCollider>().enabled = true;
+            foreach (BoxCollider col in transform.GetComponents<BoxCollider>()) {
+                col.enabled = true;
+            }
             transform.SetParent(null);
             transform.GetComponent<Rigidbody>().isKinematic = false;
             transform.gameObject.SetActive(true); 
             
         }
-
         public virtual void update()
         {
-            
         }
-        
+
     }
 }

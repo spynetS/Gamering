@@ -290,8 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef2c11b003940ae8d6eb2aa5966c8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: arrow
-  speed: 100
+  speed: 800
 --- !u!114 &7311464615797076217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: arrow
-  throwAmount: 500
+  text: {fileID: 2310422905704794492, guid: 0d904e27e656ab061991ee7ed5ab870a, type: 3}
+  throwAmount: 200
 --- !u!1 &6289079320279862519
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Items.Inventory
@@ -32,6 +33,8 @@ namespace Items.Inventory
             stacks[selectedStack].items[0].setItemToBeHold();
         }
 
+        public Transform lookingAt;
+         
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1)) {
@@ -79,6 +82,34 @@ namespace Items.Inventory
                 }
                 count++;
             }
+
+
+            RaycastHit hit;
+            Transform forward = transform.GetComponentInChildren<Camera>().transform;
+            if (Physics.Raycast(forward.position, forward.forward, out hit, 4)) {
+                if (Input.GetKeyDown(KeyCode.E)) {
+                    FetchItem(hit.transform);
+                }
+
+                if (hit.transform.tag == "item") {
+                    if(lookingAt != hit.transform) {
+                        if (lookingAt != null) {
+                            lookingAt.GetComponentInChildren<TMP_Text>().enabled = false;
+                        }
+                        lookingAt = hit.transform;
+                        lookingAt.GetComponentInChildren<TMP_Text>().enabled = true;
+                    }
+                }
+                else {
+                    lookingAt.GetComponentInChildren<TMP_Text>().enabled = false;
+                    lookingAt = null;
+                }
+
+            }
+            else {
+                lookingAt.GetComponentInChildren<TMP_Text>().enabled = false;
+                lookingAt = null;
+            }
         }
 
         private void Start()
@@ -106,14 +137,13 @@ namespace Items.Inventory
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void FetchItem(Transform other)
         {
             if (other.gameObject.CompareTag("item") && other.transform.parent != itemHolder.transform)
             {
                 if (other.GetComponent<Item>() != null)
                 {
                     other.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    Debug.Log(this.gameObject);
                     other.GetComponent<Item>().player = this.gameObject;
                     AddItem(other.GetComponent<Item>());
                 }

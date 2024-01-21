@@ -18,7 +18,6 @@ namespace Items
         private float reloadTicker = 0;
         public void reload()
         {
-            Debug.LogWarning("RELOAD");
             reloadTicker = 0;
             foreach (Stack stack in player.GetComponent<Inventory.Inventory>().stacks)
             {
@@ -31,9 +30,7 @@ namespace Items
                 }
                 foreach (Item item in toRemove) stack.items.Remove(item);
             }
-            Debug.Log(loaded.Count);
         }
-
         public override void use()
         {
              
@@ -43,7 +40,6 @@ namespace Items
             }
             
             shootTicker = 0;
-            GetComponent<Animator>().SetTrigger("shoot");
             
             var forward = player.GetComponentInChildren<Camera>().transform;
             if (loaded.Count > 0) {

@@ -8,7 +8,7 @@ public class Movement : NetworkBehaviour
 
     public float runSpeed = 10;
     public float walkSpeed = 5;
-    private float moveSpeed = 15f;
+    private float moveSpeed = 45f;
     public float jumpForce = 10f;
     public float lookSensitivity = 3f;
 
@@ -93,7 +93,7 @@ public class Movement : NetworkBehaviour
 
         if (rb.velocity.magnitude < maxSpeed)
         {
-            rb.AddForce(movement * (moveSpeed * 50 * Time.fixedDeltaTime));
+            rb.AddForce(movement * (moveSpeed * 50 * Time.deltaTime));
         }
         
         //rb.velocity = (movement * (moveSpeed * 50 * Time.fixedDeltaTime)) + new Vector3(0f, rb.velocity.y, 0f);
