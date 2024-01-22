@@ -39,7 +39,7 @@ namespace Items
             if (player != null)
             {
                 var forward = player.GetComponentInChildren<Camera>().transform.forward;
-                this.transform.position = this.player.transform.position + (forward*2);
+                this.transform.position = this.player.transform.position + (forward);
                 this.GetComponent<Rigidbody>().AddForce((forward)*amount+Vector3.up*amount/4);
 
                 var inventory = player.GetComponent<Inventory.Inventory>();
