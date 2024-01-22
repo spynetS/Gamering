@@ -721,6 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Bow
   text: {fileID: 2310422905704794492, guid: 0d904e27e656ab061991ee7ed5ab870a, type: 3}
+  image: {fileID: 21300000, guid: bd5edd85522314f589580b89d12b3d83, type: 3}
   shootSpeed: 2
   reloadTime: 1
   projectile: {fileID: 0}
@@ -729,6 +730,7 @@ MonoBehaviour:
   - arrow
   loaded: []
   caseThrower: {fileID: 0}
+  shootTicker: 0
 --- !u!54 &4706824114325646197
 Rigidbody:
   m_ObjectHideFlags: 0

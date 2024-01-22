@@ -29,11 +29,12 @@ public class Movement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerCamera = GetComponentInChildren<Camera>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     public GameObject prefab;
+    private bool ingame = false;
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X") * lookSensitivity;
@@ -63,14 +64,21 @@ public class Movement : NetworkBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        if (!Cursor.visible) {
-            Cursor.lockState = CursorLockMode.Locked;
+        if (ingame) {
             playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             transform.Rotate(Vector3.up * mouseX);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            Cursor.visible = !Cursor.visible;
+            ingame = !ingame;
+            if (ingame) {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");

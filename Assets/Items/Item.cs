@@ -13,6 +13,8 @@ namespace Items
         public GameObject player { get; set; }
        
         public GameObject text;
+
+        public Sprite image;
         
         private void Start()
         {

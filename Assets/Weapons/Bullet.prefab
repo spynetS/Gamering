@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: bullet
-  text: {fileID: 0}
+  text: {fileID: 2310422905704794492, guid: 0d904e27e656ab061991ee7ed5ab870a, type: 3}
+  image: {fileID: 21300000, guid: f4f28ee46b7fed067b69e2461b8bfe34, type: 3}
 --- !u!1 &2556765230459779757
 GameObject:
   m_ObjectHideFlags: 0
