@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 2999600258160777413}
   m_Layer: 0
   m_Name: _g_client
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,3 +264,5 @@ MonoBehaviour:
   clientName: 
   clientID: 0
   clientGameObject: {fileID: 4448050692536893454}
+  nameTagText: {fileID: 0}
+  MAIN_client: {fileID: 0}
