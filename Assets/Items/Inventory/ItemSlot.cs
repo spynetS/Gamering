@@ -25,6 +25,8 @@ namespace Items.Inventory {
                 text.text = stackPointer.items.Count.ToString();
                 if (stackPointer.items.Count > 0)
                     image.sprite = stackPointer.items[0].image;
+                else if (image.sprite != emptySlot)
+                    image.sprite = emptySlot;
             }
             else if (image.sprite != emptySlot)
                 image.sprite = emptySlot;
