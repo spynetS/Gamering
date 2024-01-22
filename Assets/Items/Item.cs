@@ -55,7 +55,7 @@ namespace Items
             transform.GetComponent<Rigidbody>().isKinematic = true;
             transform.GetComponentInChildren<TMP_Text>().enabled = false;
 
-            foreach (BoxCollider col in transform.GetComponents<BoxCollider>()) {
+            foreach (Collider col in transform.GetComponents<Collider>()) {
                 col.enabled = false;
             }
             transform.localScale = Vector3.one;
@@ -71,7 +71,7 @@ namespace Items
          */
         public void setItemToBeDroped()
         {
-            foreach (BoxCollider col in transform.GetComponents<BoxCollider>()) {
+            foreach (Collider col in transform.GetComponents<Collider>()) {
                 col.enabled = true;
             }
             transform.SetParent(null);
