@@ -56,12 +56,12 @@ public class S_WorldGen : MonoBehaviour
         }
     }
 
-    public void GenerateTerrainMesh()
+    public void GenerateTerrainMesh(Vector2 _v)
     {
         Vertices.Clear();
         Tris.Clear();
         
-        GenerateMagnitude(new Vector2(0, 0));
+        GenerateMagnitude(_v);
         SetTriangles();
 
         _tMesh = new Mesh();
@@ -74,11 +74,15 @@ public class S_WorldGen : MonoBehaviour
         _meshFilter.mesh = _tMesh;
     }
 
+    [Header("Player")]
+    [SerializeField] private S_PlayerManager swg;
+
     private void Start()
     {
-        GenerateTerrainMesh();
+        swg = GetComponent<S_PlayerManager>();
+        GenerateTerrainMesh(swg.chunkPos);
 
-        Texture2D grayImage = new Texture2D(chunkX, chunkY);
+        /* Texture2D grayImage = new Texture2D(chunkX, chunkY);
         List<Color> pixels = new List<Color>();
 
         for (int i = 0; i < Magnitudes.Count; i++)
@@ -88,6 +92,11 @@ public class S_WorldGen : MonoBehaviour
         grayImage.SetPixels(pixels.ToArray());
 
         byte[] bytes = grayImage.EncodeToPNG();
-        System.IO.File.WriteAllBytes("T:\\Unity\\Gamering\\Assets\\Scripts\\WorldGen\\output.png", bytes);
+        System.IO.File.WriteAllBytes("T:\\Unity\\Gamering\\Assets\\Scripts\\WorldGen\\output.png", bytes); */
+    }
+
+    private void LateUpdate()
+    {
+        print(swg.chunkPos);
     }
 }

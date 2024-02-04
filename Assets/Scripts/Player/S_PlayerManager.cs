@@ -27,8 +27,8 @@ public class S_PlayerManager : MonoBehaviour
             _player.transform.position.y / chunkSize.y,
             _player.transform.position.z / chunkSize.z
         );
-        chunkPos.x = _vec.x;
-        chunkPos.y = _vec.z;
+        chunkPos.x = Mathf.RoundToInt(_vec.x);
+        chunkPos.y = Mathf.RoundToInt(_vec.z);
     }
 
     private void LateUpdate()
